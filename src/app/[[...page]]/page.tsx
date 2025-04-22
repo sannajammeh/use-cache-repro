@@ -1,4 +1,5 @@
 import { unstable_cacheLife, unstable_cacheTag } from "next/cache";
+import { draftMode } from "next/headers";
 import { connection } from "next/server";
 
 export default async function Home() {
@@ -12,7 +13,11 @@ export default async function Home() {
   );
 }
 
-const getRandomValues = async (args: { language: string; market: number }) => {
+const getRandomValues = async (args: {
+  language: string;
+  market: number;
+  preview: boolean;
+}) => {
   "use cache";
 
   unstable_cacheLife("max");
@@ -24,9 +29,11 @@ const getRandomValues = async (args: { language: string; market: number }) => {
 };
 
 const RandomComponent = async () => {
+  const { isEnabled } = await draftMode();
   const values = await getRandomValues({
     language: "en",
     market: 4,
+    preview: isEnabled,
   });
 
   return <div className="text-4xl">{values}</div>;
