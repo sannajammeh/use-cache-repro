@@ -23,6 +23,8 @@ const getRandomValues = async (args: {
   unstable_cacheLife("max");
   unstable_cacheTag("random");
 
+  console.log("MISS", args);
+
   await fetch("https://jsonplaceholder.typicode.com/posts/1");
 
   return `${Math.random()} ${JSON.stringify(args)} PREVIEW`;
