@@ -18,6 +18,8 @@ const getRandomValues = async (args: { language: string; market: number }) => {
   unstable_cacheLife("max");
   unstable_cacheTag("random");
 
+  await fetch("https://jsonplaceholder.typicode.com/posts/1");
+
   return `${Math.random()} ${JSON.stringify(args)} PREVIEW`;
 };
 
