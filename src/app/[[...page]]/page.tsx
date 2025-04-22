@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { unstable_cacheLife, unstable_cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { connection } from "next/server";
@@ -12,6 +13,19 @@ export default async function Home() {
     </div>
   );
 }
+
+export const generateMetadata = async (): Promise<Metadata> => {
+  const { isEnabled } = await draftMode();
+  return {
+    other: {
+      "x-random-value": await getRandomValues({
+        language: "en",
+        market: 4,
+        preview: isEnabled,
+      }),
+    },
+  };
+};
 
 const getRandomValues = async (args: {
   language: string;
