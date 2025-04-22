@@ -1,5 +1,4 @@
 import { unstable_cacheLife, unstable_cacheTag } from "next/cache";
-import Image from "next/image";
 import { connection } from "next/server";
 
 export default async function Home() {
@@ -19,7 +18,7 @@ const getRandomValues = async (args: { language: string; market: number }) => {
   unstable_cacheLife("max");
   unstable_cacheTag("random");
 
-  return `${Math.random()} ${JSON.stringify(args)}`;
+  return `${Math.random()} ${JSON.stringify(args)} PREVIEW`;
 };
 
 const RandomComponent = async () => {
